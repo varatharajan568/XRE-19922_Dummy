@@ -1,0 +1,90 @@
+2025-12-17T05:59:49.427Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_START] TST_2010_UVE_SinglePipeline
+2025-12-17T05:59:53.069Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T05:59:54.077Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T05:59:55.071Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T05:59:56.071Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T05:59:57.071Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T05:59:58.073Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T05:59:59.077Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T06:00:00.088Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T06:00:01.073Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T06:00:02.076Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T06:00:03.074Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T06:00:04.866Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-17T06:00:05.851Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-17T06:00:06.849Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-17T06:00:07.851Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-17T06:00:08.853Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-17T06:00:09.854Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-17T06:00:10.850Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-17T06:00:11.853Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-17T06:00:12.856Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-17T06:00:13.855Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-17T06:00:14.855Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-17T06:00:15.855Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-17T06:00:16.858Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:17.872Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:18.858Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:19.858Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:20.861Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:21.875Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:23.343Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-17T06:00:24.332Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-17T06:00:25.330Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-17T06:00:26.336Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-17T06:00:27.331Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-17T06:00:28.333Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-17T06:00:29.334Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-17T06:00:30.335Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-17T06:00:31.337Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-17T06:00:32.339Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-17T06:00:33.346Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-17T06:00:34.338Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-17T06:00:35.344Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:36.345Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:37.344Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:38.340Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:39.342Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:40.344Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:42.491Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-17T06:00:43.471Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-17T06:00:44.469Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-17T06:00:45.471Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-17T06:00:46.471Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-17T06:00:47.479Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-17T06:00:48.471Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-17T06:00:49.472Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-17T06:00:50.472Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-17T06:00:51.489Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-17T06:00:52.473Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-17T06:00:53.481Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-17T06:00:54.477Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:55.474Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:56.480Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:57.483Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:58.477Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:00:59.486Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:00.477Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-17T06:01:01.480Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-17T06:01:02.482Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-17T06:01:03.485Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-17T06:01:04.483Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-17T06:01:05.489Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-17T06:01:06.483Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T06:01:07.487Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T06:01:08.483Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T06:01:09.485Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T06:01:10.485Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T06:01:11.497Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-17T06:01:12.486Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:13.490Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:14.493Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:15.494Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:16.498Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:17.489Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:18.497Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:19.491Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:20.490Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:21.494Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:22.499Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-17T06:01:23.028Z com.sky.as.apps_com.aamp[3450]:  <console.log> L3_LOG: [TST_END] 
