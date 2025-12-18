@@ -1,0 +1,93 @@
+2025-12-18T06:14:51.671Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_START] TST_2010_UVE_SinglePipeline
+2025-12-18T06:14:54.969Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:14:55.976Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:14:56.976Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:14:57.982Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:14:58.972Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:14:59.973Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:15:00.975Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:15:01.975Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:15:02.981Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:15:03.978Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:15:04.981Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:15:06.726Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T06:15:07.721Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T06:15:08.712Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T06:15:09.713Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T06:15:10.713Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T06:15:11.713Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T06:15:12.169Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T06:15:12.721Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T06:15:13.714Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T06:15:14.716Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T06:15:15.721Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T06:15:16.720Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T06:15:17.726Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T06:15:18.720Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:19.722Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:20.725Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:21.725Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:22.728Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:24.403Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T06:15:25.363Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T06:15:26.377Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T06:15:27.364Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T06:15:28.368Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T06:15:29.370Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T06:15:29.792Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-18T06:15:30.372Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-18T06:15:31.369Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-18T06:15:32.374Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-18T06:15:33.371Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-18T06:15:34.368Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-18T06:15:35.374Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: PASS
+2025-12-18T06:15:36.373Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:37.371Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:38.375Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:39.374Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:40.378Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:41.390Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:42.570Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-18T06:15:43.570Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-18T06:15:44.561Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-18T06:15:45.563Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-18T06:15:46.568Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-18T06:15:47.567Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 3: PASS
+2025-12-18T06:15:47.965Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-18T06:15:48.569Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-18T06:15:49.571Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-18T06:15:50.564Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-18T06:15:51.573Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-18T06:15:52.571Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-18T06:15:53.568Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 3: PASS
+2025-12-18T06:15:54.567Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:55.570Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:56.569Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:57.576Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:58.575Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:15:59.574Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:00.576Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-18T06:16:01.578Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-18T06:16:02.585Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-18T06:16:03.580Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-18T06:16:04.585Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-18T06:16:05.583Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Seek Main Content: PASS
+2025-12-18T06:16:05.988Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:16:06.579Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:16:07.578Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:16:08.578Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:16:09.585Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:16:10.582Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:16:11.616Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T06:16:12.584Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:13.587Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:14.583Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:15.585Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:16.591Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:17.586Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:18.585Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:19.587Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:20.592Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:21.596Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:22.607Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T06:16:24.438Z com.sky.as.apps_com.aamp.rialto[3317]:  <console.log> L3_LOG: [TST_END] 
