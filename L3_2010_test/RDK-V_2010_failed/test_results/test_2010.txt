@@ -1,0 +1,37 @@
+2025-12-18T07:07:04.948Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_START] TST_2010_UVE_SinglePipeline
+2025-12-18T07:07:07.643Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T07:07:08.636Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T07:07:09.646Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T07:07:10.639Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T07:07:11.639Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T07:07:12.640Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T07:07:13.641Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T07:07:14.645Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T07:07:15.641Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T07:07:16.649Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T07:07:17.650Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Main Content: PASS
+2025-12-18T07:07:18.644Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T07:07:19.644Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T07:07:20.646Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T07:07:21.649Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T07:07:22.646Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T07:07:23.651Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 1: PASS
+2025-12-18T07:07:25.686Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T07:07:26.687Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T07:07:27.693Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T07:07:28.690Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T07:07:29.694Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T07:07:30.690Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 1: PASS
+2025-12-18T07:07:31.692Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T07:07:32.691Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T07:07:33.692Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T07:07:34.692Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T07:07:35.697Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Video Capture not in use for this test run: PASS
+2025-12-18T07:07:36.693Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T07:07:37.694Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T07:07:38.695Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T07:07:39.695Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T07:07:40.696Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T07:07:41.698Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Pre-Load Ad 2: PASS
+2025-12-18T07:07:52.295Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_STEP] Playing Ad 2: FAIL {Error: TIMEOUT: waiting for playbackProgressUpdate}
+2025-12-18T07:07:52.295Z com.sky.as.apps_com.aamp.rialto[3780]:  <console.log> L3_LOG: [TST_END] 
