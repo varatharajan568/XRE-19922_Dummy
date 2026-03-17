@@ -1,0 +1,4 @@
+Test Info
+====================
+RDK device IP: 10.0.0.17
+RDK device image: SKTL11AEI_VBN_8.4_p1v_20260313122426sdy

@@ -1,0 +1,11 @@
+is_port_available:0117 Port is not used
+harvest_details.json found at /home/varatha/Varatharajan/internal/check/aamp_test_internal/test/l3test/archive/7f0079f5a732437be464ec28583e25ea/testdata/harvest_details.json
+<module>       :1035 Found Harvest Details
+<module>       :1036 HARVEST DETAILS: {'recording_start_time': '2023-08-09T17:37:44.485968', 'args': ['../harvest.py', '-b', '562800', '-m', '1800', 'https://lin012-gb-s8-prd-ak.cdn01.skycdp.com/v1/frag/bmff/enc/cenc/t/SKYATHD_HD_SU_SKYUK_4053_0_6139857640084951163.mpd'], 'playback_command': 'aamp/test/tools/simlinear/simlinear.py --dash 8085', 'significance': '', 'jira_ticket': '', 'user': 'mbuser334', 'url': 'https://lin012-gb-s8-prd-ak.cdn01.skycdp.com/v1/frag/bmff/enc/cenc/t/SKYATHD_HD_SU_SKYUK_4053_0_6139857640084951163.mpd'}
+set_offset_time:0178 changing offst time from 0 to 0
+start_web_server:0689 DASH Server started http://0.0.0.0:8085
+Serving manifests
+display_all_manifests:0168 Manifests available:
+display_all_manifests:0171 http://0.0.0.0:8085/v1/frag/bmff/enc/cenc/t/SKYATHD_HD_SU_SKYUK_4053_0_6139857640084951163.mpd [1, 818]
+10.0.0.17 - - [17/Mar/2026 11:23:54] code 501, message Unsupported method ('OPTIONS')
+10.0.0.17 - - [17/Mar/2026 11:23:54] "OPTIONS /v1/frag/bmff/enc/cenc/t/SKYATHD_HD_SU_SKYUK_4053_0_6139857640084951163.mpd?c3.ri= HTTP/1.1" 501 -
