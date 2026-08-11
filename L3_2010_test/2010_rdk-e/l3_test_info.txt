@@ -1,4 +1,0 @@
-Test Info
-====================
-RDK device IP: 10.6.5.206
-RDK device image: SKXI11ADS_MIDDLEWARE_DEV_develop_20251215071048

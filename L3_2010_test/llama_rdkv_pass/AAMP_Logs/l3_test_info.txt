@@ -1,4 +1,0 @@
-Test Info
-====================
-RDK device IP: 10.6.5.56
-RDK device image: SKTL11AEI_VBN_25Q4_sprint_20251209232345sdy_EOSUK_AAMP

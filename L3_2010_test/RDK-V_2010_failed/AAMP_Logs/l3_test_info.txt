@@ -1,4 +1,0 @@
-Test Info
-====================
-RDK device IP: 10.6.5.116
-RDK device image: SKXI11ADS_VBN_25Q4_sprint_20251217221430sdy_NG
