@@ -178,7 +178,7 @@ index 0c0b2ef..b467561 100755
  fi
  
 diff --git a/build_dependencies.sh b/build_dependencies.sh
-index 62609a0..fb3848c 100755
+index 62609a0..066dbfe 100755
 --- a/build_dependencies.sh
 +++ b/build_dependencies.sh
 @@ -26,13 +26,10 @@ GITHUB_WORKSPACE="${PWD}"
@@ -331,7 +331,7 @@ index 62609a0..fb3848c 100755
  restore_workspace_ownership()
  {
      if [[ -z "${RESTORE_OWNER_USER}" || -z "${RESTORE_OWNER_GROUP}" ]]; then
-@@ -148,118 +257,201 @@ restore_workspace_ownership()
+@@ -148,118 +257,192 @@ restore_workspace_ownership()
  
  trap restore_workspace_ownership EXIT
  
@@ -416,19 +416,10 @@ index 62609a0..fb3848c 100755
 +                echo "INFO:   Plugins config: ${EXTERNAL_WPE_PLUGINS_CONFIG}"
 +                echo "INFO: Skipping in-repo Thunder/ThunderTools/entservices-apis builds."
 +        else
-+                cat <<'EOF'
-+    ERROR: macOS bootstrap could not find a usable WPEFramework toolchain.
-+
-+    Run build_dependencies.sh directly after making a WPEFramework toolchain
-+    available in a standard location (repo install, /usr/local, /usr, or
-+    /opt/homebrew).
-+
-+Required files under the detected toolchain root:
-+- usr/lib/cmake/WPEFramework/WPEFrameworkConfig.cmake
-+- usr/lib/cmake/WPEFrameworkPlugins/WPEFrameworkPluginsConfig.cmake
-+    (PluginsConfig.cmake is also accepted)
-+EOF
-+                exit 1
++        echo "WARNING: macOS external WPEFramework toolchain not found."
++        echo "WARNING: Falling back to in-repo Thunder dependency build."
++        echo "WARNING: This path may fail on some macOS hosts due to upstream"
++        echo "WARNING: Thunder source compatibility limitations."
 +        fi
 +fi
 +
@@ -629,7 +620,7 @@ index 62609a0..fb3848c 100755
  
  #############################
  # Build googletest
-@@ -267,6 +459,7 @@ cmake --build build/ThunderClientLibraries
+@@ -267,6 +450,7 @@ cmake --build build/ThunderClientLibraries
  clone_if_missing googletest --branch v1.15.2 https://github.com/google/googletest.git
  
  cmake -G Ninja -S googletest -B build/googletest \
@@ -637,7 +628,7 @@ index 62609a0..fb3848c 100755
      -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
      -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
      -DGENERIC_CMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
-@@ -278,3 +471,4 @@ cmake -G Ninja -S googletest -B build/googletest \
+@@ -278,3 +462,4 @@ cmake -G Ninja -S googletest -B build/googletest \
  cmake --build build/googletest --target install
  
  ls -la ${GITHUB_WORKSPACE}
