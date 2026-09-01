@@ -178,7 +178,7 @@ index 0c0b2ef..b467561 100755
  fi
  
 diff --git a/build_dependencies.sh b/build_dependencies.sh
-index 62609a0..dc368a7 100755
+index 62609a0..433c4e6 100755
 --- a/build_dependencies.sh
 +++ b/build_dependencies.sh
 @@ -26,13 +26,10 @@ GITHUB_WORKSPACE="${PWD}"
@@ -198,16 +198,21 @@ index 62609a0..dc368a7 100755
      if command -v sudo >/dev/null 2>&1; then
          SUDO="sudo"
      else
-@@ -46,6 +43,8 @@ PYTHON_VENV_BIN="${PYTHON_VENV_DIR}/bin/python3"
+@@ -46,6 +43,13 @@ PYTHON_VENV_BIN="${PYTHON_VENV_DIR}/bin/python3"
  BUILD_PYTHON_BIN="$(command -v python3)"
  RESTORE_OWNER_USER="${SUDO_USER:-}"
  RESTORE_OWNER_GROUP=""
 +TROWER_MESON_ARGS=(--warnlevel 3)
 +CMAKE_COMPAT_ARGS=()
++SKIP_THUNDER_STACK_BUILD=0
++
++EXT_INSTALL_ROOT="${EXT_INSTALL_ROOT:-}"
++EXTERNAL_WPE_CONFIG=""
++EXTERNAL_WPE_PLUGINS_CONFIG=""
  
  if [[ -n "${RESTORE_OWNER_USER}" ]]; then
      RESTORE_OWNER_GROUP="$(id -gn "${RESTORE_OWNER_USER}")"
-@@ -109,6 +108,17 @@ clone_if_missing()
+@@ -109,6 +113,17 @@ clone_if_missing()
      fi
  }
  
@@ -225,35 +230,76 @@ index 62609a0..dc368a7 100755
  apply_patch_if_needed()
  {
      local patch_file="$1"
-@@ -127,6 +137,27 @@ apply_patch_if_needed()
+@@ -127,6 +142,68 @@ apply_patch_if_needed()
      exit 1
  }
  
-+fail_unsupported_macos_thunder_build()
++resolve_external_wpe_toolchain()
 +{
-+        cat <<'EOF'
-+ERROR: Full dependency bootstrap is not supported on this macOS host.
++    local candidates=()
++    local root=""
++    local cfg1=""
++    local cfg2=""
++    local p1=""
++    local p2=""
++    local p3=""
++    local p4=""
 +
-+The pinned Thunder/WPEFramework sources used by this script currently fail on
-+macOS for repository-level reasons, including:
-+- Thunder Source/core/Time.h colliding with system <time.h> on default
-+    case-insensitive macOS filesystems.
-+- Linux-only headers and sources in the pinned Thunder core build, such as
-+    linux/rtnetlink.h.
++    if [[ -n "${EXT_INSTALL_ROOT}" ]]; then
++        candidates+=("${EXT_INSTALL_ROOT}")
++    fi
 +
-+Use one of these options instead:
-+1. Run build_dependencies.sh on Ubuntu/Linux, matching the CI environment.
-+2. Use a Linux VM/container for the dependency bootstrap.
-+3. Provide an existing external WPEFramework/WPEFrameworkPlugins install and
-+     use Tests/L1Tests/run.sh against that toolchain.
-+EOF
-+        exit 1
++    candidates+=(
++        "${GITHUB_WORKSPACE}/install"
++        "/usr/local"
++        "/usr"
++        "/opt/homebrew"
++        "/opt/homebrew/opt/wpeframework"
++        "/opt/homebrew/opt/wpeframeworkplugins"
++    )
++
++    for root in "${candidates[@]}"; do
++        cfg1="${root}/usr/lib/cmake/WPEFramework/WPEFrameworkConfig.cmake"
++        cfg2="${root}/lib/cmake/WPEFramework/WPEFrameworkConfig.cmake"
++        p1="${root}/usr/lib/cmake/WPEFrameworkPlugins/WPEFrameworkPluginsConfig.cmake"
++        p2="${root}/lib/cmake/WPEFrameworkPlugins/WPEFrameworkPluginsConfig.cmake"
++        p3="${root}/usr/lib/cmake/WPEFrameworkPlugins/PluginsConfig.cmake"
++        p4="${root}/lib/cmake/WPEFrameworkPlugins/PluginsConfig.cmake"
++
++        EXTERNAL_WPE_CONFIG=""
++        EXTERNAL_WPE_PLUGINS_CONFIG=""
++
++        if [[ -f "${cfg1}" ]]; then
++            EXTERNAL_WPE_CONFIG="${cfg1}"
++        elif [[ -f "${cfg2}" ]]; then
++            EXTERNAL_WPE_CONFIG="${cfg2}"
++        else
++            continue
++        fi
++
++        if [[ -f "${p1}" ]]; then
++            EXTERNAL_WPE_PLUGINS_CONFIG="${p1}"
++        elif [[ -f "${p2}" ]]; then
++            EXTERNAL_WPE_PLUGINS_CONFIG="${p2}"
++        elif [[ -f "${p3}" ]]; then
++            EXTERNAL_WPE_PLUGINS_CONFIG="${p3}"
++        elif [[ -f "${p4}" ]]; then
++            EXTERNAL_WPE_PLUGINS_CONFIG="${p4}"
++        else
++            continue
++        fi
++
++        EXT_INSTALL_ROOT="${root}"
++        return 0
++    done
++
++    return 1
 +}
 +
  restore_workspace_ownership()
  {
      if [[ -z "${RESTORE_OWNER_USER}" || -z "${RESTORE_OWNER_GROUP}" ]]; then
-@@ -148,27 +179,76 @@ restore_workspace_ownership()
+@@ -148,118 +225,190 @@ restore_workspace_ownership()
  
  trap restore_workspace_ownership EXIT
  
@@ -320,7 +366,27 @@ index 62609a0..dc368a7 100755
  ensure_python_module jsonref
  
 +if [[ "${OS_NAME}" == "Darwin" ]]; then
-+    fail_unsupported_macos_thunder_build
++        if resolve_external_wpe_toolchain; then
++                SKIP_THUNDER_STACK_BUILD=1
++                echo "INFO: Using external WPEFramework toolchain on macOS."
++                echo "INFO:   WPEFramework config: ${EXTERNAL_WPE_CONFIG}"
++                echo "INFO:   Plugins config: ${EXTERNAL_WPE_PLUGINS_CONFIG}"
++                echo "INFO: Skipping in-repo Thunder/ThunderTools/entservices-apis builds."
++        else
++                cat <<'EOF'
++    ERROR: macOS bootstrap could not find a usable WPEFramework toolchain.
++
++    Run build_dependencies.sh directly after making a WPEFramework toolchain
++    available in a standard location (repo install, /usr/local, /usr, or
++    /opt/homebrew).
++
++Required files under the detected toolchain root:
++- usr/lib/cmake/WPEFramework/WPEFrameworkConfig.cmake
++- usr/lib/cmake/WPEFrameworkPlugins/WPEFrameworkPluginsConfig.cmake
++    (PluginsConfig.cmake is also accepted)
++EOF
++                exit 1
++        fi
 +fi
 +
  ############################
@@ -340,39 +406,187 @@ index 62609a0..dc368a7 100755
  ninja -C build install
  cd ..
  ###########################################
-@@ -200,6 +280,7 @@ cd -
+ # Clone the required repositories
  
+-
+-clone_if_missing ThunderTools --branch R4_4-RDK https://github.com/rdkcentral/ThunderTools.git
+-cd ThunderTools
+-git checkout $THUNDER_TOOLS_COMMIT_SHA
+-cd ..
+-
+-clone_if_missing Thunder --branch R4_4-RDK https://github.com/rdkcentral/Thunder.git
+-cd Thunder
+-git checkout $THUNDER_COMMIT_SHA
+-cd ..
+-
+-clone_if_missing ThunderClientLibraries --branch R4.4.2 https://github.com/rdkcentral/ThunderClientLibraries.git
+-
+-clone_if_missing entservices-apis --branch main https://github.com/rdkcentral/entservices-apis.git
+-
+-clone_if_missing entservices-testframework --branch 2.0.0 https://github.com/rdkcentral/entservices-testframework.git
+-
+-############################
+-# Build Thunder-Tools
+-echo "======================================================================================"
+-echo "buliding thunderTools"
+-cd ThunderTools
+-cd -
+-
+-
+-cmake -G Ninja -S ThunderTools -B build/ThunderTools \
+-    -DEXCEPTIONS_ENABLE=ON \
+-    -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
+-    -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
+-    -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
+-    -DGENERIC_CMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
+-    -DCMAKE_PREFIX_PATH="$GITHUB_WORKSPACE/install/usr"
+-
+-cmake --build build/ThunderTools --target install
+-
+-
+-############################
+-# Build Thunder
+-echo "======================================================================================"
+-echo "buliding thunder"
+-
+-cd Thunder
+-cd -
+-
+-cmake -G Ninja -S Thunder -B build/Thunder \
+-    -DMESSAGING=ON \
+-    -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
+-    -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
+-    -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
+-    -DGENERIC_CMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
+-    -DCMAKE_PREFIX_PATH="$GITHUB_WORKSPACE/install/usr" \
+-    -DBUILD_TYPE=Debug \
+-    -DBINDING=127.0.0.1 \
+-    -DPORT=55555 \
+-    -DEXCEPTIONS_ENABLE=ON
+-
+-cmake --build build/Thunder --target install
+-
+-############################
+-# Build entservices-apis
+-echo "======================================================================================"
+-echo "buliding entservices-apis"
+-cd entservices-apis
+-rm -rf jsonrpc/DTV.json
+-cd ..
+-
+-cmake -G Ninja -S entservices-apis  -B build/entservices-apis \
+-    -DEXCEPTIONS_ENABLE=ON \
+-    -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
+-    -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
+-    -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
+-    -DCMAKE_PREFIX_PATH="$GITHUB_WORKSPACE/install/usr"
+-
+-cmake --build build/entservices-apis --target install
+-
+-
+-#############################
+-# Build Thunder-clientlibraries
+-
+-cmake -G Ninja -S ThunderClientLibraries -B build/ThunderClientLibraries \
+-    -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
+-    -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
+-    -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
+-    -DCMAKE_PREFIX_PATH="$GITHUB_WORKSPACE/install/usr"
+-
+-cmake --build build/ThunderClientLibraries
++if [[ "${SKIP_THUNDER_STACK_BUILD}" -eq 0 ]]; then
++    clone_if_missing ThunderTools --branch R4_4-RDK https://github.com/rdkcentral/ThunderTools.git
++    cd ThunderTools
++    git checkout $THUNDER_TOOLS_COMMIT_SHA
++    cd ..
++
++    clone_if_missing Thunder --branch R4_4-RDK https://github.com/rdkcentral/Thunder.git
++    cd Thunder
++    git checkout $THUNDER_COMMIT_SHA
++    cd ..
++
++    clone_if_missing ThunderClientLibraries --branch R4.4.2 https://github.com/rdkcentral/ThunderClientLibraries.git
++
++    clone_if_missing entservices-apis --branch main https://github.com/rdkcentral/entservices-apis.git
++
++    clone_if_missing entservices-testframework --branch 2.0.0 https://github.com/rdkcentral/entservices-testframework.git
++
++    ############################
++    # Build Thunder-Tools
++    echo "======================================================================================"
++    echo "buliding thunderTools"
++    cd ThunderTools
++    cd -
++
++    cmake -G Ninja -S ThunderTools -B build/ThunderTools \
++        "${CMAKE_COMPAT_ARGS[@]}" \
++        -DEXCEPTIONS_ENABLE=ON \
++        -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
++        -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
++        -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
++        -DGENERIC_CMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
++        -DCMAKE_PREFIX_PATH="$GITHUB_WORKSPACE/install/usr"
++
++    cmake --build build/ThunderTools --target install
++
++    ############################
++    # Build Thunder
++    echo "======================================================================================"
++    echo "buliding thunder"
++
++    cd Thunder
++    cd -
++
++    cmake -G Ninja -S Thunder -B build/Thunder \
++        "${CMAKE_COMPAT_ARGS[@]}" \
++        -DMESSAGING=ON \
++        -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
++        -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
++        -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
++        -DGENERIC_CMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
++        -DCMAKE_PREFIX_PATH="$GITHUB_WORKSPACE/install/usr" \
++        -DBUILD_TYPE=Debug \
++        -DBINDING=127.0.0.1 \
++        -DPORT=55555 \
++        -DEXCEPTIONS_ENABLE=ON
++
++    cmake --build build/Thunder --target install
++
++    ############################
++    # Build entservices-apis
++    echo "======================================================================================"
++    echo "buliding entservices-apis"
++    cd entservices-apis
++    rm -rf jsonrpc/DTV.json
++    cd ..
++
++    cmake -G Ninja -S entservices-apis  -B build/entservices-apis \
++        "${CMAKE_COMPAT_ARGS[@]}" \
++        -DEXCEPTIONS_ENABLE=ON \
++        -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
++        -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
++        -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
++        -DCMAKE_PREFIX_PATH="$GITHUB_WORKSPACE/install/usr"
++
++    cmake --build build/entservices-apis --target install
++
++    #############################
++    # Build Thunder-clientlibraries
++    cmake -G Ninja -S ThunderClientLibraries -B build/ThunderClientLibraries \
++        "${CMAKE_COMPAT_ARGS[@]}" \
++        -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
++        -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
++        -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
++        -DCMAKE_PREFIX_PATH="$GITHUB_WORKSPACE/install/usr"
++
++    cmake --build build/ThunderClientLibraries
++else
++    echo "INFO: Thunder dependency stack build skipped on macOS (external toolchain mode)."
++fi
  
- cmake -G Ninja -S ThunderTools -B build/ThunderTools \
-+    "${CMAKE_COMPAT_ARGS[@]}" \
-     -DEXCEPTIONS_ENABLE=ON \
-     -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
-     -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
-@@ -219,6 +300,7 @@ cd Thunder
- cd -
- 
- cmake -G Ninja -S Thunder -B build/Thunder \
-+    "${CMAKE_COMPAT_ARGS[@]}" \
-     -DMESSAGING=ON \
-     -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
-     -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
-@@ -241,6 +323,7 @@ rm -rf jsonrpc/DTV.json
- cd ..
- 
- cmake -G Ninja -S entservices-apis  -B build/entservices-apis \
-+    "${CMAKE_COMPAT_ARGS[@]}" \
-     -DEXCEPTIONS_ENABLE=ON \
-     -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
-     -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
-@@ -254,6 +337,7 @@ cmake --build build/entservices-apis --target install
- # Build Thunder-clientlibraries
- 
- cmake -G Ninja -S ThunderClientLibraries -B build/ThunderClientLibraries \
-+    "${CMAKE_COMPAT_ARGS[@]}" \
-     -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
-     -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
-     -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
-@@ -267,6 +351,7 @@ cmake --build build/ThunderClientLibraries
+ #############################
+ # Build googletest
+@@ -267,6 +416,7 @@ cmake --build build/ThunderClientLibraries
  clone_if_missing googletest --branch v1.15.2 https://github.com/google/googletest.git
  
  cmake -G Ninja -S googletest -B build/googletest \
@@ -380,7 +594,7 @@ index 62609a0..dc368a7 100755
      -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
      -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
      -DGENERIC_CMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
-@@ -278,3 +363,4 @@ cmake -G Ninja -S googletest -B build/googletest \
+@@ -278,3 +428,4 @@ cmake -G Ninja -S googletest -B build/googletest \
  cmake --build build/googletest --target install
  
  ls -la ${GITHUB_WORKSPACE}
