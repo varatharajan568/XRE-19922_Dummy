@@ -1,0 +1,387 @@
+diff --git a/Tests/L1Tests/README.md b/Tests/L1Tests/README.md
+index 421ece7..976266e 100644
+--- a/Tests/L1Tests/README.md
++++ b/Tests/L1Tests/README.md
+@@ -4,7 +4,10 @@ This directory contains the OpenCDMI client and plugin Level 1 tests. The tests
+ 
+ ## Supported environment
+ 
+-The dependency bootstrap script targets Ubuntu/Linux. Run the commands below from the repository root on an Ubuntu build machine.
++The L1 runner uses Linux and macOS shell/runtime conventions. A successful
++build requires WPEFramework and WPEFrameworkPlugins CMake packages for the
++selected host platform. The repository bootstrap builds those dependencies on
++Linux. On macOS, use an existing external WPEFramework toolchain.
+ 
+ Required tools include:
+ 
+@@ -13,18 +16,28 @@ Required tools include:
+ - CMake and Ninja
+ - Python 3
+ - A working C++ compiler
+-- Permission to install Ubuntu packages with `sudo`
++- Permission to install Linux system packages with `sudo`, when needed
++- Xcode Command Line Tools on macOS
+ 
+ ## Build dependencies
+ 
+-The first build, or a build on a clean machine, should bootstrap the Thunder and test dependencies:
++On Linux, the first build, or a build on a clean machine, should bootstrap the
++Thunder and test dependencies:
+ 
+ ```bash
+ cd /path/to/entservices-opencdmi
+ sudo ./build_dependencies.sh
+ ```
+ 
+-The script installs system packages and builds the required dependencies under the repository `install` directory. It also downloads the required Thunder, ThunderTools, ThunderClientLibraries, entservices-apis, entservices-testframework, GoogleTest, and trower-base64 sources when they are not already present.
++The script installs system packages and builds the required dependencies under
++the repository `install` directory. It also downloads the required Thunder,
++ThunderTools, ThunderClientLibraries, entservices-apis,
++entservices-testframework, GoogleTest, and trower-base64 sources when they are
++not already present.
++
++On macOS, this bootstrap is not supported for the pinned Thunder branches used
++by the repository. Point `EXT_INSTALL_ROOT` at a prebuilt WPEFramework /
++WPEFrameworkPlugins toolchain instead.
+ 
+ If the script was run as root and the generated files are not readable by the normal user, repair ownership from the repository root:
+ 
+@@ -83,13 +96,15 @@ Set the test timeout in seconds:
+ ./Tests/L1Tests/run.sh -t 120
+ ```
+ 
+-Let the runner bootstrap missing dependencies automatically:
++Let the runner bootstrap missing dependencies automatically on Linux:
+ 
+ ```bash
+ ./Tests/L1Tests/run.sh -d
+ ```
+ 
+-The `-d` option may require `sudo` because `build_dependencies.sh` installs Ubuntu packages. Running the bootstrap explicitly first gives clearer control over package installation.
++The `-d` option is Linux-only. It may require `sudo` because
++`build_dependencies.sh` installs system packages. Running the bootstrap
++explicitly first gives clearer control over package installation.
+ 
+ ## External dependency installation
+ 
+@@ -114,7 +129,8 @@ It expects to find at least `WPEFrameworkConfig.cmake` and the WPEFramework plug
+ 
+ ### Missing CMake package configs
+ 
+-If the runner reports missing `WPEFrameworkConfig.cmake` or `WPEFrameworkPluginsConfig.cmake`, build the dependencies first:
++If the runner reports missing `WPEFrameworkConfig.cmake` or
++`WPEFrameworkPluginsConfig.cmake`, build the dependencies first on Linux:
+ 
+ ```bash
+ sudo ./build_dependencies.sh
+@@ -129,4 +145,10 @@ The L1 runner intentionally disables the production OpenCDMI subdirectories and
+ 
+ ### Running on macOS or Windows
+ 
+-`build_dependencies.sh` uses Ubuntu/Debian package names and `apt`, so it is not a portable dependency installer. Use an Ubuntu environment such as a native Linux machine, VM, container, or CI runner for the documented flow.
++On macOS, `build_dependencies.sh` does not build the pinned Thunder dependency
++stack. Use a prebuilt WPEFramework / WPEFrameworkPlugins toolchain and set
++`EXT_INSTALL_ROOT` before running the tests. The runner uses `sysctl` for CPU
++detection and `DYLD_LIBRARY_PATH` when executing tests.
++
++Windows is not supported natively. Use an Ubuntu environment such as a
++native Linux machine, VM, container, or CI runner.
+diff --git a/Tests/L1Tests/run.sh b/Tests/L1Tests/run.sh
+index 0c0b2ef..b467561 100755
+--- a/Tests/L1Tests/run.sh
++++ b/Tests/L1Tests/run.sh
+@@ -32,11 +32,15 @@
+ #   -d              bootstrap dependencies using repo build_dependencies.sh
+ 
+ if [[ -z "${MAKEFLAGS}" ]]; then
+-    export MAKEFLAGS=-j$(nproc)
++    if [[ "$(uname -s)" == "Darwin" ]]; then
++        export MAKEFLAGS=-j$(sysctl -n hw.ncpu)
++    else
++        export MAKEFLAGS=-j$(nproc)
++    fi
+ fi
+ 
+ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+-REPO_ROOT="$(realpath "${SCRIPT_DIR}/../..")"
++REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+ BUILD_DIR="${SCRIPT_DIR}/build"
+ INSTALL_DIR="${SCRIPT_DIR}/install"
+ RESULTS_JSON="${BUILD_DIR}/rdkL1TestResults.json"
+@@ -157,9 +161,14 @@ if [[ -z "${_wpe_cfg}" || -z "${_plugins_cfg}" ]] && [[ "${BOOTSTRAP_DEPS}" -eq
+             ./build_dependencies.sh
+         ); then
+             echo "ERROR: dependency bootstrap failed."
+-            echo "On Ubuntu this is commonly due to sudo/package-install permissions. Retry with:"
+-            echo "  cd ${REPO_ROOT}"
+-            echo "  sudo ./build_dependencies.sh"
++            if [[ "$(uname -s)" == "Darwin" ]]; then
++                echo "On macOS, use a prebuilt WPEFramework/WPEFrameworkPlugins toolchain"
++                echo "and set EXT_INSTALL_ROOT instead of using build_dependencies.sh."
++            else
++                echo "If system-package installation needs privileges, retry with:"
++                echo "  cd ${REPO_ROOT}"
++                echo "  sudo ./build_dependencies.sh"
++            fi
+             exit 1
+         fi
+ 
+@@ -185,13 +194,22 @@ if [[ -z "${_wpe_cfg}" || -z "${_plugins_cfg}" ]]; then
+     echo "Auto-detection checks: ${REPO_ROOT}/install, ${SCRIPT_DIR}/install, /usr/local, /usr"
+     echo "Set EXT_INSTALL_ROOT to your installed toolchain root, e.g.:"
+     echo "  EXT_INSTALL_ROOT=\"/path/to/install\" ./run.sh"
+-    echo "If dependencies are not built yet, run from repo root:"
+-    echo "  sudo ./build_dependencies.sh"
++    if [[ "$(uname -s)" == "Darwin" ]]; then
++        echo "On macOS, provide a prebuilt WPEFramework/WPEFrameworkPlugins install."
++        echo "build_dependencies.sh does not build the pinned Thunder stack there."
++    else
++        echo "If dependencies are not built yet, run build_dependencies.sh from repo root."
++        echo "On Linux, it uses sudo to install system packages."
++    fi
+     echo "Or let this script trigger it for you:"
+     echo "  ./run.sh -d"
+     echo ""
+     echo "Note: build_dependencies.sh installs system packages and Python"
+-    echo "dependencies itself, and usually needs sudo privileges on Ubuntu."
++    if [[ "$(uname -s)" == "Darwin" ]]; then
++        echo "dependencies itself, but the repository bootstrap is Linux-only."
++    else
++        echo "dependencies itself. Linux package installation usually needs sudo."
++    fi
+     echo ""
+     echo "This avoids CMake errors such as:"
+     echo "  string no output variable specified"
+@@ -238,7 +256,12 @@ elif [[ -x "${BUILD_DIR}/Tests/L1Tests/OpenCDMIL1Tests" ]]; then
+ fi
+ 
+ export PATH="${INSTALL_DIR}/bin:${PATH}"
+-export LD_LIBRARY_PATH="${INSTALL_DIR}/lib:${INSTALL_DIR}/lib/wpeframework/plugins:${EXT_INSTALL_ROOT}/usr/lib:${EXT_INSTALL_ROOT}/usr/lib/wpeframework/plugins:${EXT_INSTALL_ROOT}/lib:${EXT_INSTALL_ROOT}/lib/wpeframework/plugins:${LD_LIBRARY_PATH}"
++RUNTIME_LIBRARY_PATH="${INSTALL_DIR}/lib:${INSTALL_DIR}/lib/wpeframework/plugins:${EXT_INSTALL_ROOT}/usr/lib:${EXT_INSTALL_ROOT}/usr/lib/wpeframework/plugins:${EXT_INSTALL_ROOT}/lib:${EXT_INSTALL_ROOT}/lib/wpeframework/plugins"
++if [[ "$(uname -s)" == "Darwin" ]]; then
++    export DYLD_LIBRARY_PATH="${RUNTIME_LIBRARY_PATH}:${DYLD_LIBRARY_PATH:-}"
++else
++    export LD_LIBRARY_PATH="${RUNTIME_LIBRARY_PATH}:${LD_LIBRARY_PATH:-}"
++fi
+ export GTEST_OUTPUT="json:${RESULTS_JSON}"
+ 
+ if [[ -z "${RUNNER}" ]]; then
+@@ -257,7 +280,10 @@ fi
+ 
+ if command -v timeout >/dev/null 2>&1; then
+     timeout "${RUN_TIMEOUT}" "${CMD[@]}"
++elif command -v gtimeout >/dev/null 2>&1; then
++    gtimeout "${RUN_TIMEOUT}" "${CMD[@]}"
+ else
++    echo "WARNING: timeout command not found; running tests without a timeout."
+     "${CMD[@]}"
+ fi
+ 
+diff --git a/build_dependencies.sh b/build_dependencies.sh
+index 62609a0..dc368a7 100755
+--- a/build_dependencies.sh
++++ b/build_dependencies.sh
+@@ -26,13 +26,10 @@ GITHUB_WORKSPACE="${PWD}"
+ ls -la ${GITHUB_WORKSPACE}
+ cd ${GITHUB_WORKSPACE}
+ 
+-is_root=0
+-if [[ "$(id -u)" -eq 0 ]]; then
+-    is_root=1
+-fi
+-
++OS_NAME="$(uname -s)"
+ SUDO=""
+-if [[ "${is_root}" -eq 0 ]]; then
++
++if [[ "${OS_NAME}" == "Linux" ]] && [[ "$(id -u)" -ne 0 ]]; then
+     if command -v sudo >/dev/null 2>&1; then
+         SUDO="sudo"
+     else
+@@ -46,6 +43,8 @@ PYTHON_VENV_BIN="${PYTHON_VENV_DIR}/bin/python3"
+ BUILD_PYTHON_BIN="$(command -v python3)"
+ RESTORE_OWNER_USER="${SUDO_USER:-}"
+ RESTORE_OWNER_GROUP=""
++TROWER_MESON_ARGS=(--warnlevel 3)
++CMAKE_COMPAT_ARGS=()
+ 
+ if [[ -n "${RESTORE_OWNER_USER}" ]]; then
+     RESTORE_OWNER_GROUP="$(id -gn "${RESTORE_OWNER_USER}")"
+@@ -109,6 +108,17 @@ clone_if_missing()
+     fi
+ }
+ 
++brew_install_formula_if_missing()
++{
++    local formula="$1"
++
++    if brew list --versions "${formula}" >/dev/null 2>&1; then
++        return 0
++    fi
++
++    brew install "${formula}"
++}
++
+ apply_patch_if_needed()
+ {
+     local patch_file="$1"
+@@ -127,6 +137,27 @@ apply_patch_if_needed()
+     exit 1
+ }
+ 
++fail_unsupported_macos_thunder_build()
++{
++        cat <<'EOF'
++ERROR: Full dependency bootstrap is not supported on this macOS host.
++
++The pinned Thunder/WPEFramework sources used by this script currently fail on
++macOS for repository-level reasons, including:
++- Thunder Source/core/Time.h colliding with system <time.h> on default
++    case-insensitive macOS filesystems.
++- Linux-only headers and sources in the pinned Thunder core build, such as
++    linux/rtnetlink.h.
++
++Use one of these options instead:
++1. Run build_dependencies.sh on Ubuntu/Linux, matching the CI environment.
++2. Use a Linux VM/container for the dependency bootstrap.
++3. Provide an existing external WPEFramework/WPEFrameworkPlugins install and
++     use Tests/L1Tests/run.sh against that toolchain.
++EOF
++        exit 1
++}
++
+ restore_workspace_ownership()
+ {
+     if [[ -z "${RESTORE_OWNER_USER}" || -z "${RESTORE_OWNER_GROUP}" ]]; then
+@@ -148,27 +179,76 @@ restore_workspace_ownership()
+ 
+ trap restore_workspace_ownership EXIT
+ 
+-# # ############################# 
++# # #############################
+ #1. Install Dependencies and packages
+ 
+-${SUDO} apt update
+-${SUDO} apt install -y valgrind lcov clang meson curl \
+-    libsqlite3-dev libcurl4-openssl-dev libsystemd-dev \
+-    libboost-all-dev libwebsocketpp-dev libunwind-dev \
+-    libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
+-    libcunit1 libcunit1-dev protobuf-compiler-grpc \
+-    libgrpc-dev libgrpc++-dev python3-pip python3-venv
++case "${OS_NAME}" in
++    Linux)
++        if ! command -v apt >/dev/null 2>&1; then
++            echo "ERROR: This Linux distribution is not supported. apt is required."
++            exit 1
++        fi
++
++        ${SUDO} apt update
++        ${SUDO} apt install -y valgrind lcov clang meson curl cmake ninja-build \
++            libsqlite3-dev libcurl4-openssl-dev libsystemd-dev \
++            libboost-all-dev libwebsocketpp-dev libunwind-dev \
++            libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
++            libcunit1 libcunit1-dev protobuf-compiler-grpc \
++            libgrpc-dev libgrpc++-dev python3-pip python3-venv
++        ;;
++    Darwin)
++        if ! command -v brew >/dev/null 2>&1; then
++            echo "ERROR: Homebrew is required on macOS. Install it from https://brew.sh/."
++            exit 1
++        fi
++
++        brew_install_formula_if_missing boost
++        brew_install_formula_if_missing cmake
++        brew_install_formula_if_missing cunit
++        brew_install_formula_if_missing curl
++        brew_install_formula_if_missing gstreamer
++        brew link --overwrite gstreamer
++        brew_install_formula_if_missing grpc
++        brew_install_formula_if_missing lcov
++        brew_install_formula_if_missing meson
++        brew_install_formula_if_missing ninja
++        brew_install_formula_if_missing pkg-config
++        brew_install_formula_if_missing protobuf
++        brew_install_formula_if_missing python
++        brew_install_formula_if_missing websocketpp
++        ;;
++    *)
++        echo "ERROR: Unsupported operating system: ${OS_NAME}."
++        exit 1
++        ;;
++esac
++
++if [[ "${OS_NAME}" == "Darwin" ]]; then
++    TROWER_MESON_ARGS+=(--buildtype debug -Dwerror=false -Db_coverage=false)
++    CMAKE_COMPAT_ARGS+=(-DCMAKE_POLICY_VERSION_MINIMUM=3.5)
++else
++    TROWER_MESON_ARGS+=(--werror)
++fi
+ 
+ ensure_python_module jsonref
+ 
++if [[ "${OS_NAME}" == "Darwin" ]]; then
++    fail_unsupported_macos_thunder_build
++fi
++
+ ############################
+ # Build trevor-base64
+ if [ ! -d "trower-base64" ]; then
+ git clone https://github.com/xmidt-org/trower-base64.git
+ fi
+ cd trower-base64
+-meson setup --warnlevel 3 --werror --prefix "${GITHUB_WORKSPACE}/install/usr" build
+-ninja -C build
++if [[ -d build ]]; then
++    rm -rf build
++fi
++
++meson setup "${TROWER_MESON_ARGS[@]}" \
++    --prefix "${GITHUB_WORKSPACE}/install/usr" build
+ ninja -C build install
+ cd ..
+ ###########################################
+@@ -200,6 +280,7 @@ cd -
+ 
+ 
+ cmake -G Ninja -S ThunderTools -B build/ThunderTools \
++    "${CMAKE_COMPAT_ARGS[@]}" \
+     -DEXCEPTIONS_ENABLE=ON \
+     -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
+     -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
+@@ -219,6 +300,7 @@ cd Thunder
+ cd -
+ 
+ cmake -G Ninja -S Thunder -B build/Thunder \
++    "${CMAKE_COMPAT_ARGS[@]}" \
+     -DMESSAGING=ON \
+     -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
+     -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
+@@ -241,6 +323,7 @@ rm -rf jsonrpc/DTV.json
+ cd ..
+ 
+ cmake -G Ninja -S entservices-apis  -B build/entservices-apis \
++    "${CMAKE_COMPAT_ARGS[@]}" \
+     -DEXCEPTIONS_ENABLE=ON \
+     -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
+     -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
+@@ -254,6 +337,7 @@ cmake --build build/entservices-apis --target install
+ # Build Thunder-clientlibraries
+ 
+ cmake -G Ninja -S ThunderClientLibraries -B build/ThunderClientLibraries \
++    "${CMAKE_COMPAT_ARGS[@]}" \
+     -DPYTHON_EXECUTABLE="${BUILD_PYTHON_BIN}" \
+     -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
+     -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
+@@ -267,6 +351,7 @@ cmake --build build/ThunderClientLibraries
+ clone_if_missing googletest --branch v1.15.2 https://github.com/google/googletest.git
+ 
+ cmake -G Ninja -S googletest -B build/googletest \
++    "${CMAKE_COMPAT_ARGS[@]}" \
+     -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/install/usr" \
+     -DCMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
+     -DGENERIC_CMAKE_MODULE_PATH="$GITHUB_WORKSPACE/install/tools/cmake" \
+@@ -278,3 +363,4 @@ cmake -G Ninja -S googletest -B build/googletest \
+ cmake --build build/googletest --target install
+ 
+ ls -la ${GITHUB_WORKSPACE}
++echo "INFO: build_dependencies.sh completed successfully."
